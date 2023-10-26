@@ -3,7 +3,7 @@ import { Card, Button } from 'react-bootstrap';
 
 // utilities
 import { formatCurrency } from '../utilities/formatCurrency';
-import { UseShoppingCart } from '../context/ShoppingCart';
+import { UseShoppingCart } from '../context/ShoppingCartContext';
 
 // heroIcons
 import { MinusIcon, PlusIcon, TrashIcon } from '@heroicons/react/20/solid';

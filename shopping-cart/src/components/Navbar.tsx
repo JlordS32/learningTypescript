@@ -4,8 +4,11 @@ import { NavLink } from 'react-router-dom';
 
 // heroicons imports
 import { ShoppingCartIcon } from '@heroicons/react/20/solid';
+import { UseShoppingCart } from '../context/ShoppingCartContext';
 
 const Navbar = () => {
+	const { openCart, cartQuantity } = UseShoppingCart();
+
 	return (
 		<NavbarBs className='bg-white shadow-sm mb-3'>
 			<Container>
@@ -36,20 +39,28 @@ const Navbar = () => {
 					variant='outline-primary rounded-circle'
 					style={{
 						position: 'relative',
-                  height: '3rem',
-                  aspectRatio: 'auto'
+						height: '3rem',
+						aspectRatio: 'auto',
 					}}
+					onClick={openCart}
 				>
 					<ShoppingCartIcon width={20} />
-					<div className='rounded-circle bg-danger d-flex justify-content-center align-items-center text-white' style={{
-                  width: '1.5rem',
-                  aspectRatio: '1/1',
-                  position: 'absolute',
-                  bottom: 0,
-                  right: 0,
-                  transform: 'translate(30%, 30%)',
-						fontSize: '0.7rem'
-               }}>3</div>
+					{cartQuantity > 0 && (
+						<div
+							className='rounded-circle bg-danger d-flex justify-content-center align-items-center text-white'
+							style={{
+								width: '1.5rem',
+								aspectRatio: '1/1',
+								position: 'absolute',
+								bottom: 0,
+								right: 0,
+								transform: 'translate(30%, 30%)',
+								fontSize: '0.7rem',
+							}}
+						>
+							{cartQuantity}
+						</div>
+					)}
 				</Button>
 			</Container>
 		</NavbarBs>

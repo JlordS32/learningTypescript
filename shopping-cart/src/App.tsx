@@ -12,7 +12,7 @@ import NotFound from './pages/NotFound';
 import Store from './pages/Store';
 import About from './pages/About';
 import Main from './layout/Main';
-import { ShoppingCartProvider } from './context/ShoppingCart';
+import { ShoppingCartProvider } from './context/ShoppingCartContext';
 
 function App() {
 	const router = createBrowserRouter([
