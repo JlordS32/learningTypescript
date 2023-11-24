@@ -1,82 +1,38 @@
-// -------------------
-// interfaces
-// -------------------
+// TYPE ALIASES
 
-interface Author {
+// ex. 1
+
+type Rgb = [r: number, g: number, b: number];
+
+function RandomColor(): Rgb {
+	const r = Math.floor(Math.random() * 255);
+	const g = Math.floor(Math.random() * 255);
+	const b = Math.floor(Math.random() * 255);
+
+	return [r, g, b];
+}
+
+const randomColor = RandomColor();
+
+console.log(randomColor);
+
+// Object literal
+
+type User = {
 	name: string;
-	avatar: string;
-}
-
-const authorOne: Author[] = [
-	{
-		name: 'Jen',
-		avatar: 'https://joeschmoe.io/api/v1/random',
-	},
-	{
-		name: 'John',
-		avatar: 'https://joeschmoe.io/api/v1/random',
-	},
-];
-
-interface Post {
-	title: string;
-	body: string;
-	tags: string[];
-	createAt: Date;
-	author: Author;
-}
-
-const newPost: Post = {
-	title: 'My dog ate my homework',
-	body: 'Jesus what the fuck',
-	tags: ['dogs', 'newme', 'wtf'],
-	createAt: new Date(),
-	author: {
-		name: 'Jen',
-		avatar: 'https://joeschmoe.io/api/v1/random',
-	},
+	age: number;
 };
 
-console.log(newPost);
-
-// -------------------
-// as function argument types
-// -------------------
-
-function createPost(post: Post): void {
-	console.log(`Created Post: ${post.title} by ${post.author.name}`);
-}
-
-createPost(newPost);
-
-// -------------------
-// with arrays
-// -------------------
-
-const posts: Post[] = [
+const user: User[] = [
 	{
-		title: 'My dog ate my homework',
-		body: 'Jesus what the fuck',
-		tags: ['dogs', 'newme', 'wtf'],
-		createAt: new Date(),
-		author: {
-			name: 'Jen',
-			avatar: 'https://joeschmoe.io/api/v1/random',
-		},
-	},
-	{
-		title: 'Good day today',
-		body: "Yesterday, I've seen a flying butterfly. Weather was beautiful. A very beautiful day. It's FRIDAY!",
-		tags: ['newdaynewme', 'beautiful', 'FRIDAY!'],
-		createAt: new Date(),
-		author: {
-			name: 'Jane',
-			avatar: 'https://joeschmoe.io/api/v1/random',
-		},
+		name: 'John',
+		age: 24,
 	},
 ];
 
-console.log('---------------')
-posts.forEach((post) => {
-   createPost(post);
-});
+function formatUser(user: User): void {
+	console.log(`${user.name} is ${user.age} years old`);
+}
+
+formatUser(user[0]);
+formatUser({name: 'Jaylou', age: 21})
