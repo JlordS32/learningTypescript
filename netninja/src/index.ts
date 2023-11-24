@@ -1,38 +1,82 @@
-// TUPLES
+// -------------------
+// interfaces
+// -------------------
 
-let person: [string, number, boolean] = ['Max', 22, true];
-
-person[0] = 'John';
-
-person[0] = 0; // error
-
-console.log(person[0]);
-
-// TUPLE EXAMPLES
-
-let hsla: [number, string, string, number];
-hsla = [200, '100%', '50%', 1];
-
-console.log(hsla);
-
-let xy: [number, number];
-xy = [-94.7, 20.1];
-
-console.log(xy);
-
-function useCoords(xy: [x: number, y: number]): [number, number] {
-	return [xy[0], xy[1]];
+interface Author {
+	name: string;
+	avatar: string;
 }
 
-const [lat, long] = useCoords(xy);
+const authorOne: Author[] = [
+	{
+		name: 'Jen',
+		avatar: 'https://joeschmoe.io/api/v1/random',
+	},
+	{
+		name: 'John',
+		avatar: 'https://joeschmoe.io/api/v1/random',
+	},
+];
 
-console.log(long);
-console.log(lat);
+interface Post {
+	title: string;
+	body: string;
+	tags: string[];
+	createAt: Date;
+	author: Author;
+}
 
-// named tuples
+const newPost: Post = {
+	title: 'My dog ate my homework',
+	body: 'Jesus what the fuck',
+	tags: ['dogs', 'newme', 'wtf'],
+	createAt: new Date(),
+	author: {
+		name: 'Jen',
+		avatar: 'https://joeschmoe.io/api/v1/random',
+	},
+};
 
-let user: [name: string, age: number];
+console.log(newPost);
 
-user = ['Max', 30];
-user = [3, 43];
-console.log(user);
+// -------------------
+// as function argument types
+// -------------------
+
+function createPost(post: Post): void {
+	console.log(`Created Post: ${post.title} by ${post.author.name}`);
+}
+
+createPost(newPost);
+
+// -------------------
+// with arrays
+// -------------------
+
+const posts: Post[] = [
+	{
+		title: 'My dog ate my homework',
+		body: 'Jesus what the fuck',
+		tags: ['dogs', 'newme', 'wtf'],
+		createAt: new Date(),
+		author: {
+			name: 'Jen',
+			avatar: 'https://joeschmoe.io/api/v1/random',
+		},
+	},
+	{
+		title: 'Good day today',
+		body: "Yesterday, I've seen a flying butterfly. Weather was beautiful. A very beautiful day. It's FRIDAY!",
+		tags: ['newdaynewme', 'beautiful', 'FRIDAY!'],
+		createAt: new Date(),
+		author: {
+			name: 'Jane',
+			avatar: 'https://joeschmoe.io/api/v1/random',
+		},
+	},
+];
+
+console.log('---------------')
+posts.forEach((post) => {
+   createPost(post);
+});
