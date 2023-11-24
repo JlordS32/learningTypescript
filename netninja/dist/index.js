@@ -1,31 +1,26 @@
 "use strict";
-// --------
-// arrays
-// --------
-let names = ['sdfsdf', 'sdfsd', 'sdf'];
-let ages = [1, 1, 1, 1, 1];
-let things = [1, true, 'hello'];
-console.log(things);
-// FUNCTIONS
-// -----------
-function addTwoNumbers(a, b) {
-    return a + b;
-}
-// Arrow func
-const subtractTwoNumbers = (a, b) => {
-    return a - b;
+// any type
+let age;
+let title;
+age = 30;
+age = false;
+title = 25;
+title = {
+    hello: 'world',
 };
-console.log(addTwoNumbers(4, 5));
-console.log(subtractTwoNumbers(4, 5));
-function addAllNumbers(items) {
-    return items.reduce((prev, next) => {
-        return prev + next;
-    }, 0);
+console.log(age);
+// note: don't use any type as much as possible
+// any type in arrays
+let names = [];
+names.push(1);
+names.push('hello');
+names.push(false);
+names.push([3, 2, 3]);
+names.push([{ something: 'sdf', hello: 3, isTrue: true }]);
+names.push({ any: 'sdf' });
+console.log(names);
+// function & any
+function addTogether(value) {
+    return value + value;
 }
-console.log(addAllNumbers([1, 3, 3, 5, 3, 4]));
-// RETURN TYPE INTERFERENCE
-function formatGreeting(name, greeting) {
-    return `${greeting}, ${name}`;
-}
-const result = formatGreeting('Jaylou', 'Hello');
-console.log(result);
+console.log(addTogether('sdf'));
