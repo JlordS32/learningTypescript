@@ -1,26 +1,24 @@
 "use strict";
-// any type
-let age;
-let title;
-age = 30;
-age = false;
-title = 25;
-title = {
-    hello: 'world',
-};
-console.log(age);
-// note: don't use any type as much as possible
-// any type in arrays
-let names = [];
-names.push(1);
-names.push('hello');
-names.push(false);
-names.push([3, 2, 3]);
-names.push([{ something: 'sdf', hello: 3, isTrue: true }]);
-names.push({ any: 'sdf' });
-console.log(names);
-// function & any
-function addTogether(value) {
-    return value + value;
+// TUPLES
+let person = ['Max', 22, true];
+person[0] = 'John';
+person[0] = 0; // error
+console.log(person[0]);
+// TUPLE EXAMPLES
+let hsla;
+hsla = [200, '100%', '50%', 1];
+console.log(hsla);
+let xy;
+xy = [-94.7, 20.1];
+console.log(xy);
+function useCoords(xy) {
+    return [xy[0], xy[1]];
 }
-console.log(addTogether('sdf'));
+const [lat, long] = useCoords(xy);
+console.log(long);
+console.log(lat);
+// named tuples
+let user;
+user = ['Max', 30];
+user = [3, 43];
+console.log(user);

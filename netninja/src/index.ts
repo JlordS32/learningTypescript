@@ -1,37 +1,38 @@
-// any type
+// TUPLES
 
-let age: any;
-let title: any;
+let person: [string, number, boolean] = ['Max', 22, true];
 
-age = 30;
-age = false;
+person[0] = 'John';
 
-title = 25;
-title = {
-	hello: 'world',
-};
+person[0] = 0; // error
 
-console.log(age);
+console.log(person[0]);
 
-// note: don't use any type as much as possible
+// TUPLE EXAMPLES
 
-// any type in arrays
+let hsla: [number, string, string, number];
+hsla = [200, '100%', '50%', 1];
 
-let names: any[] = [];
+console.log(hsla);
 
-names.push(1);
-names.push('hello');
-names.push(false);
-names.push([3, 2, 3]);
-names.push([{ something: 'sdf', hello: 3, isTrue: true }]);
-names.push({ any: 'sdf' });
+let xy: [number, number];
+xy = [-94.7, 20.1];
 
-console.log(names);
+console.log(xy);
 
-// function & any
-
-function addTogether(value: any) {
-	return value + value;
+function useCoords(xy: [x: number, y: number]): [number, number] {
+	return [xy[0], xy[1]];
 }
 
-console.log(addTogether('sdf'))
+const [lat, long] = useCoords(xy);
+
+console.log(long);
+console.log(lat);
+
+// named tuples
+
+let user: [name: string, age: number];
+
+user = ['Max', 30];
+user = [3, 43];
+console.log(user);
