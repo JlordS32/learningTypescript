@@ -9,22 +9,36 @@ let things = [1, true, 'hello'];
 
 console.log(things);
 
-console.log(names);
+// FUNCTIONS
+// -----------
 
-// OBJECT LITERALS
-
-interface Person {
-	name: string;
-	age: number;
-	[key: string]: any;
+function addTwoNumbers(a: number, b: number): number {
+	return a + b;
 }
 
-const person: Person = {
-	name: 'John',
-	age: 123,
-	something: 243,
-	theUnitedStatesofWhatever: {
-		name: 'Something',
-		age: '1000',
-	},
+// Arrow func
+
+const subtractTwoNumbers = (a: number, b: number): number => {
+	return a - b;
 };
+
+console.log(addTwoNumbers(4, 5));
+console.log(subtractTwoNumbers(4, 5));
+
+function addAllNumbers(items: number[]): number {
+	return items.reduce((prev, next) => {
+		return prev + next;
+	}, 0);
+}
+
+console.log(addAllNumbers([1, 3, 3, 5, 3, 4]));
+
+// RETURN TYPE INTERFERENCE
+
+function formatGreeting(name: string, greeting: string): string {
+	return `${greeting}, ${name}`;
+}
+
+const result = formatGreeting('Jaylou', 'Hello');
+
+console.log(result);
