@@ -1,24 +1,23 @@
 "use strict";
-// type guards
-function swapIdType(id) {
-    if (typeof id === 'string') {
-        // can use string methods
-        return parseInt(id);
-    }
-    else {
-        // can use number methods and properties
-        return `String: ${id.toString()}`;
-    }
+// reusable interfaces
+const something = {
+    quantity: 1,
+};
+function printQuantity(item) {
+    console.log(`the quantity of the item is ${item.quantity}`);
 }
-const idOne = swapIdType(1);
-const idTwo = swapIdType('2');
-console.log(idOne);
-console.log(idTwo);
-function logDetails(value) {
-    if (value.type === 'user') {
-        console.log(value.username);
-    }
-    if (value.type === 'person') {
-        console.log(value.age);
-    }
-}
+const fruit = {
+    name: 'mango',
+    quantity: 50,
+};
+const vehicle = {
+    name: 'car',
+    quantity: 3,
+};
+const person = {
+    name: 'john',
+    age: 40,
+};
+printQuantity(fruit);
+printQuantity(vehicle);
+printQuantity(person);
