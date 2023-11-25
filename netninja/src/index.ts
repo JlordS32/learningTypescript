@@ -1,45 +1,48 @@
-// UNION TYPES
+// type guards
 
-type Direction = 'left' | 'right' | 'up' | 'down';
+type Id = number | string;
 
-function move(direction: Direction) {
-	console.log(direction);
+function swapIdType(id: Id) {
+	if (typeof id === 'string') {
+		// can use string methods
+		return parseInt(id);
+	} else {
+		// can use number methods and properties
+		return `String: ${id.toString()}`;
+	}
 }
 
-move('up');
-move('shit'); // error
+const idOne = swapIdType(1);
+const idTwo = swapIdType('2');
 
-let someId: number | string;
+console.log(idOne);
+console.log(idTwo);
 
-someId = 10;
-someId = '10';
-someId = true; // error
+// -----------------
+// tagged interfaces
+// -----------------
 
-type Email = string | null;
-type ID = string | number | null;
-type User = {
-   id: ID;
-	name: string;
-	email: Email;
-};
-
-let email: Email = null;
-
-const userOne: User = {
-   id: 'audf-df3d-fdfv-343s',
-	name: 'testUser',
-	email: 'test@example.com',
-};
-
-function swapIdtype(id: ID): ID {
-
-   if (typeof id === 'string') {
-      parseInt(id);
-   }
-
-   if (typeof id === 'number') {
-      id.toString();
-   }
-
-   return id;
+interface User {
+	type: 'user';
+	username: string;
+	email: string;
+	id: Id;
 }
+
+interface Person {
+	type: 'person';
+	firstname: string;
+	age: number;
+	id: Id;
+}
+
+function logDetails(value: User | Person): void {
+	if (value.type === 'user') {
+		console.log(value.username);
+	}
+
+	if (value.type === 'person') {
+		console.log(value.age);
+	}
+}
+

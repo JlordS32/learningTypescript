@@ -1,26 +1,24 @@
 "use strict";
-// UNION TYPES
-function move(direction) {
-    console.log(direction);
-}
-move('up');
-move('shit'); // error
-let someId;
-someId = 10;
-someId = '10';
-someId = true; // error
-let email = null;
-const userOne = {
-    id: 'audf-df3d-fdfv-343s',
-    name: 'testUser',
-    email: 'test@example.com',
-};
-function swapIdtype(id) {
+// type guards
+function swapIdType(id) {
     if (typeof id === 'string') {
-        parseInt(id);
+        // can use string methods
+        return parseInt(id);
     }
-    if (typeof id === 'number') {
-        id.toString();
+    else {
+        // can use number methods and properties
+        return `String: ${id.toString()}`;
     }
-    return id;
+}
+const idOne = swapIdType(1);
+const idTwo = swapIdType('2');
+console.log(idOne);
+console.log(idTwo);
+function logDetails(value) {
+    if (value.type === 'user') {
+        console.log(value.username);
+    }
+    if (value.type === 'person') {
+        console.log(value.age);
+    }
 }
