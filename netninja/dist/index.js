@@ -1,21 +1,26 @@
 "use strict";
-// TYPE ALIASES
-function RandomColor() {
-    const r = Math.floor(Math.random() * 255);
-    const g = Math.floor(Math.random() * 255);
-    const b = Math.floor(Math.random() * 255);
-    return [r, g, b];
+// UNION TYPES
+function move(direction) {
+    console.log(direction);
 }
-const randomColor = RandomColor();
-console.log(randomColor);
-const user = [
-    {
-        name: 'John',
-        age: 24,
-    },
-];
-function formatUser(user) {
-    console.log(`${user.name} is ${user.age} years old`);
+move('up');
+move('shit'); // error
+let someId;
+someId = 10;
+someId = '10';
+someId = true; // error
+let email = null;
+const userOne = {
+    id: 'audf-df3d-fdfv-343s',
+    name: 'testUser',
+    email: 'test@example.com',
+};
+function swapIdtype(id) {
+    if (typeof id === 'string') {
+        parseInt(id);
+    }
+    if (typeof id === 'number') {
+        id.toString();
+    }
+    return id;
 }
-formatUser(user[0]);
-formatUser({ name: 'Jaylou', age: 21 });

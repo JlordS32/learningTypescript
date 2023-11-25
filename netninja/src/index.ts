@@ -1,38 +1,45 @@
-// TYPE ALIASES
+// UNION TYPES
 
-// ex. 1
+type Direction = 'left' | 'right' | 'up' | 'down';
 
-type Rgb = [r: number, g: number, b: number];
-
-function RandomColor(): Rgb {
-	const r = Math.floor(Math.random() * 255);
-	const g = Math.floor(Math.random() * 255);
-	const b = Math.floor(Math.random() * 255);
-
-	return [r, g, b];
+function move(direction: Direction) {
+	console.log(direction);
 }
 
-const randomColor = RandomColor();
+move('up');
+move('shit'); // error
 
-console.log(randomColor);
+let someId: number | string;
 
-// Object literal
+someId = 10;
+someId = '10';
+someId = true; // error
 
+type Email = string | null;
+type ID = string | number | null;
 type User = {
+   id: ID;
 	name: string;
-	age: number;
+	email: Email;
 };
 
-const user: User[] = [
-	{
-		name: 'John',
-		age: 24,
-	},
-];
+let email: Email = null;
 
-function formatUser(user: User): void {
-	console.log(`${user.name} is ${user.age} years old`);
+const userOne: User = {
+   id: 'audf-df3d-fdfv-343s',
+	name: 'testUser',
+	email: 'test@example.com',
+};
+
+function swapIdtype(id: ID): ID {
+
+   if (typeof id === 'string') {
+      parseInt(id);
+   }
+
+   if (typeof id === 'number') {
+      id.toString();
+   }
+
+   return id;
 }
-
-formatUser(user[0]);
-formatUser({name: 'Jaylou', age: 21})
