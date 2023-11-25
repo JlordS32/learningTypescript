@@ -1,33 +1,53 @@
-// reusable interfaces
+// function signatures
 
-interface hasQuantity {
-	quantity: number;
-	[key: string]: string | number;
+type Calculator = (numberOne: number, numTwo: number) => number;
+
+function add(a: number, b: number) {
+	return a + b;
 }
 
-const something: hasQuantity = {
-	quantity: 1,
-};
-
-function printQuantity(item: hasQuantity): void {
-	console.log(`the quantity of the item is ${item.quantity}`);
+function multiply(a: number, b: number) {
+	return a * b;
 }
 
-const fruit = {
-	name: 'mango',
-	quantity: 50,
+function square(a: number): number {
+	return a * a;
+}
+
+function addThreeNumber(a: number, b: number, c: number): number {
+	return a + b + c;
+}
+function joinNumbers(a: number, b: number) {
+	return `${a}${b}`;
+}
+
+let calcs: Calculator[] = [];
+
+calcs.push(add);
+calcs.push(multiply);
+calcs.push(square);
+calcs.push(joinNumbers); // error
+calcs.push(addThreeNumber); // error
+
+// function signatures on interfaces
+// ---------------------------------------
+
+interface HasArea {
+	name: string;
+	calcArea: (length: number) => number;
+}
+
+const shapeOne: HasArea = {
+	name: 'square',
+	calcArea: (a) => a * a,
 };
 
-const vehicle = {
-	name: 'car',
-	quantity: 3,
+const shapeTwo: HasArea = {
+	name: 'circle',
+	calcArea: (r: number) => {
+		return Math.PI * r ** 2;
+	},
 };
 
-const person = {
-	name: 'john',
-	age: 40,
-};
-
-printQuantity(fruit);
-printQuantity(vehicle);
-printQuantity(person);
+console.log(shapeOne.calcArea(10));
+console.log(shapeTwo.calcArea(10));

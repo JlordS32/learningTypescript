@@ -1,23 +1,35 @@
 "use strict";
-// reusable interfaces
-const something = {
-    quantity: 1,
-};
-function printQuantity(item) {
-    console.log(`the quantity of the item is ${item.quantity}`);
+// function signatures
+function add(a, b) {
+    return a + b;
 }
-const fruit = {
-    name: 'mango',
-    quantity: 50,
+function multiply(a, b) {
+    return a * b;
+}
+function square(a) {
+    return a * a;
+}
+function addThreeNumber(a, b, c) {
+    return a + b + c;
+}
+function joinNumbers(a, b) {
+    return `${a}${b}`;
+}
+let calcs = [];
+calcs.push(add);
+calcs.push(multiply);
+calcs.push(square);
+calcs.push(joinNumbers); // error
+calcs.push(addThreeNumber); // error
+const shapeOne = {
+    name: 'square',
+    calcArea: (a) => a * a,
 };
-const vehicle = {
-    name: 'car',
-    quantity: 3,
+const shapeTwo = {
+    name: 'circle',
+    calcArea: (r) => {
+        return Math.PI * r ** 2;
+    },
 };
-const person = {
-    name: 'john',
-    age: 40,
-};
-printQuantity(fruit);
-printQuantity(vehicle);
-printQuantity(person);
+console.log(shapeOne.calcArea(10));
+console.log(shapeTwo.calcArea(10));
