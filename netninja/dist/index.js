@@ -1,43 +1,32 @@
 "use strict";
-// -----------------
-// Generic Constraints
-// -----------------
-class DataCollection {
-    constructor(data) {
-        this.data = data;
+Object.defineProperty(exports, "__esModule", { value: true });
+const fs_1 = require("fs");
+class CSVWriter {
+    constructor(columns) {
+        this.columns = columns;
+        this.csv = this.columns.join(',') + '\n';
     }
-    loadOne() {
-        const i = Math.floor(Math.random() * this.data.length);
-        const output = this.data[i];
-        console.log(output);
-        return output;
+    save(filename) {
+        (0, fs_1.appendFileSync)(filename, this.csv);
+        this.csv = '\n';
+        console.log('file saved to', filename);
     }
-    loadAll() {
-        console.log(this.data);
-        return this.data;
+    addRows(values) {
+        let rows = values.map((v) => this.formatRow(v));
+        this.csv += rows.join('\n');
+        console.log(this.csv);
     }
-    add(value) {
-        this.data.push(value);
-        console.log(this.data);
-        return this.data;
-    }
-    delete(id) {
-        const filteredData = (this.data = this.data.filter((x) => x.id !== id));
-        this.data = filteredData;
+    formatRow(p) {
+        return this.columns.map((col) => p[col]).join(',');
     }
 }
-const users = new DataCollection([
+const writer = new CSVWriter(['id', 'amount', 'to', 'notes']);
+writer.addRows([
     {
-        name: 'jlord',
-        age: 10000,
-        id: 1,
-    },
-    {
-        name: 'zlord',
-        age: 10000,
         id: 2,
+        amount: 10.99,
+        to: 'someones',
+        notes: 'some notes',
     },
 ]);
-users.loadAll();
-users.delete(2);
-users.loadAll();
+writer.save('./data/payment.csv');

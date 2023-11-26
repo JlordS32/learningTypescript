@@ -1,57 +1,48 @@
-// -----------------
-// Generic Constraints
-// -----------------
-
-interface HasID {
+import { appendFileSync } from 'fs';
+interface Payment {
 	id: number;
+	amount: number;
+	to: string;
+	notes: string;
 }
 
-class DataCollection<T extends HasID> {
-	constructor(private data: T[]) {}
+type PaymentColumns = ('id' | 'amount' | 'to' | 'notes')[];
 
-	loadOne(): T {
-		const i = Math.floor(Math.random() * this.data.length);
-		const output = this.data[i];
+class CSVWriter {
+	private csv: string;
 
-		console.log(output);
-		return output;
-	}
-	loadAll(): T[] {
-		console.log(this.data);
-		return this.data;
-	}
-	add(value: T): T[] {
-		this.data.push(value);
-		console.log(this.data);
-		return this.data;
+	constructor(private columns: PaymentColumns) {
+		this.csv = this.columns.join(',') + '\n';
 	}
 
-	delete(id: number): void {
-		const filteredData = (this.data = this.data.filter((x) => x.id !== id));
+	save(filename: string): void {
+		appendFileSync(filename, this.csv);
+		this.csv = '\n';
 
-		this.data = filteredData;
+		console.log('file saved to', filename);
+	}
+
+	addRows(values: Payment[]) {
+		let rows = values.map((v) => this.formatRow(v));
+
+		this.csv += rows.join('\n');
+
+		console.log(this.csv);
+	}
+
+	private formatRow(p: Payment) {
+		return this.columns.map((col) => p[col]).join(',');
 	}
 }
 
-interface User {
-	name: string;
-	age: number;
-	id: number;
-}
-
-const users = new DataCollection<User>([
+const writer = new CSVWriter(['id', 'amount', 'to', 'notes']);
+writer.addRows([
 	{
-		name: 'jlord',
-		age: 10000,
-		id: 1,
-	},
-	{
-		name: 'zlord',
-		age: 10000,
 		id: 2,
+		amount: 10.99,
+		to: 'someones',
+		notes: 'some notes',
 	},
 ]);
 
-users.loadAll();
-users.delete(2);
-users.loadAll();
+writer.save('./data/payment.csv');
