@@ -10,11 +10,11 @@ export class DataResource<T> {
 
    }
 
-   async add(id: number) {
+   async delete(data: T) {
 
    }
 
-   async delete(data: T) {
+   async save(data: T) {
 
    }
 }
