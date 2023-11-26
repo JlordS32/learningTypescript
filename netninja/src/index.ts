@@ -1,38 +1,26 @@
-// Generics 101
-// ---------------
+// --------------------
+// Intersection Type
+// --------------------
 
-function logAndReturnValue<T>(val: T): T {
-	console.log(val);
-	return val;
+interface HasID {
+	id: number;
 }
 
-const resultNumber = logAndReturnValue<number>(1);
-const resultString = logAndReturnValue<string>('hello');
-const resultBool = logAndReturnValue<boolean>(true);
-
-// example 2
-
-function getRandomArrayValue<T>(values: T[]): T {
-	const i = Math.floor(Math.random() * values.length);
-	return values[i];
+function addIdToValue<T>(val: T): T & HasID {
+	return {
+		id: Math.random(),
+		...val,
+	};
 }
 
-const array = getRandomArrayValue<string>(['apples', 'banana', 'potato']);
-console.log(array);
-
-// example 3
-
-interface User {
-	name: string;
-	age: number;
+interface Post {
+	title: string;
+	thumbsUp: number;
 }
 
-const user: User[] = [
-	{ name: 'Max', age: 30 },
-	{ name: 'Manu', age: 25 },
-	{ name: 'John', age: 24 },
-	{ name: 'Conor', age: 20 },
-];
+const post = addIdToValue<Post>({
+	title: 'My Post',
+	thumbsUp: 69,
+});
 
-const selectedUser = getRandomArrayValue<User>(user);
-console.log(selectedUser)
+console.log(Object.entries(post).map(([_, value]) => value).join('\n'));
