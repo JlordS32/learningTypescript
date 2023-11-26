@@ -1,53 +1,25 @@
 "use strict";
-// ------------
-// Classes 101
-// ------------
-class MenuItem {
-    constructor(title, price) {
-        this.title = title;
-        this.price = price;
+class CSVWriter {
+    constructor(columns) {
+        this.columns = columns;
+        this.csv = this.columns.join(',');
     }
-    get details() {
-        return `
-			Pizza: ${this.title}
-			Price: $${this.price}
-		`;
+    addRows(values) {
+        let rows = values.map((v) => this.formatRow(v));
+        this.csv += '\n' + rows.join('\n');
+        console.log(this.csv);
     }
-}
-class Pizza extends MenuItem {
-    constructor(title, price) {
-        super(title, price);
-        this.base = 'classic';
-        this.toppings = [];
+    formatRow(p) {
+        return this.columns.map((col) => p[col]).join(',');
     }
-    addTopping(topping) {
-        this.toppings.push(topping);
-    }
-    removeToppings(topping) {
-        this.toppings = this.toppings.filter((t) => t !== topping);
-    }
-    selectbase(b) {
-        this.base = b;
-    }
-    format() {
-        let formatted = this.details + '\n';
-        // base
-        formatted += `Pizza on a ${this.base} base `;
-        // toppings
-        if (this.toppings.length < 1) {
-            formatted += 'with no toppings\n';
-        }
-        else {
-            formatted += `with the toppings of ${this.toppings.join(', ')}\n`;
-        }
-        return formatted;
+    printCsv() {
+        console.log(this.csv);
     }
 }
-const pizza = new Pizza('Meat Lovers', 15);
-pizza.addTopping('Peperoni');
-pizza.addTopping('Jalapenos');
-pizza.selectbase('garlic');
-function printFormatted(val) {
-    console.log(val.format());
-}
-printFormatted(pizza);
+const writer = new CSVWriter(['id', 'amount', 'to', 'notes']);
+writer.addRows([
+    { id: 1, amount: 100, to: 'John', notes: 'Payment' },
+    { id: 2, amount: 200, to: 'Jane', notes: 'Birthday Present' },
+    { id: 2, amount: 500, to: 'Mario', notes: 'Fee' },
+    { id: 2, amount: 2300, to: 'Bowser', notes: 'Borrowed Money' },
+]);

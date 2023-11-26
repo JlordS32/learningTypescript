@@ -1,68 +1,40 @@
-// ------------
-// Classes 101
-// ------------
-
-type Base = 'classic' | 'thick' | 'thin' | 'garlic';
-
-interface HasFormatter {
-	format(): string;
+interface Payment {
+	id: number;
+	amount: number;
+	to: string;
+	notes: string;
 }
 
-abstract class MenuItem implements HasFormatter {
-	constructor(private title: string, private price: number) {}
+type PaymentColumns = ('id' | 'amount' | 'to' | 'notes')[];
 
-	get details(): string {
-		return `
-			Pizza: ${this.title}
-			Price: $${this.price}
-		`;
+class CSVWriter {
+	private csv: string;
+
+	constructor(private columns: PaymentColumns) {
+		this.csv = this.columns.join(',');
 	}
 
-	abstract format(): string;
-}
-class Pizza extends MenuItem {
-	constructor(title: string, price: number) {
-		super(title, price);
+	addRows(values: Payment[]) {
+		let rows = values.map((v) => this.formatRow(v));
+
+		this.csv += '\n' + rows.join('\n');
+
+		console.log(this.csv);
 	}
 
-	private base: Base = 'classic';
-	private toppings: string[] = [];
-	addTopping(topping: string): void {
-		this.toppings.push(topping);
+	private formatRow(p: Payment) {
+		return this.columns.map((col) => p[col]).join(',');
 	}
 
-	removeToppings(topping: string): void {
-		this.toppings = this.toppings.filter((t) => t !== topping);
-	}
-
-	selectbase(b: Base): void {
-		this.base = b;
-	}
-
-	format(): string {
-		let formatted = this.details + '\n';
-
-		// base
-		formatted += `Pizza on a ${this.base} base `;
-
-		// toppings
-		if (this.toppings.length < 1) {
-			formatted += 'with no toppings\n';
-		} else {
-			formatted += `with the toppings of ${this.toppings.join(', ')}\n`
-		}
-
-		return formatted;
+	printCsv() {
+		console.log(this.csv);
 	}
 }
 
-const pizza = new Pizza('Meat Lovers', 15);
-pizza.addTopping('Peperoni');
-pizza.addTopping('Jalapenos');
-pizza.selectbase('garlic');
-
-function printFormatted(val: HasFormatter) {
-	console.log(val.format());
-}
-
-printFormatted(pizza);
+const writer = new CSVWriter(['id', 'amount', 'to', 'notes']);
+writer.addRows([
+	{ id: 1, amount: 100, to: 'John', notes: 'Payment' },
+	{ id: 2, amount: 200, to: 'Jane', notes: 'Birthday Present' },
+	{ id: 2, amount: 500, to: 'Mario', notes: 'Fee' },
+	{ id: 2, amount: 2300, to: 'Bowser', notes: 'Borrowed Money' },
+]);
