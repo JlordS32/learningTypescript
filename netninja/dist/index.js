@@ -9,7 +9,7 @@ class CSVWriter {
         this.csv = this.columns.join(',') + '\n';
     }
     save(filename) {
-        (0, fs_1.appendFileSync)(filename, this.csv);
+        (0, fs_1.writeFileSync)(filename, this.csv);
         this.csv = '\n';
         console.log('file saved to', filename);
     }

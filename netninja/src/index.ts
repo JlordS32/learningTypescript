@@ -1,4 +1,4 @@
-import { appendFileSync } from 'fs';
+import { writeFileSync  } from 'fs';
 
 // test
 export class CSVWriter<T> {
@@ -9,7 +9,7 @@ export class CSVWriter<T> {
 	}
 
 	save(filename: string): void {
-		appendFileSync(filename, this.csv);
+		writeFileSync (filename, this.csv);
 		this.csv = '\n';
 
 		console.log('file saved to', filename);
