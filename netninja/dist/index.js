@@ -27,11 +27,13 @@ class Pizza {
         this.base = base;
     }
 }
-const pizza = new Pizza('Hawaiian', 10);
-pizza.selectbase('thin');
-pizza.addTopping('peperoni');
-pizza.addTopping('pineapple');
-pizza.addTopping('ham');
-pizza.printThePizza();
-pizza.removeToppings('pineapple');
-pizza.printThePizza();
+const pizzaOne = new Pizza('Hawaiian', 10);
+const pizzaTwo = new Pizza('Meat Lovers', 15);
+function addMushroomsToPizza(pizzaz) {
+    pizzaz.forEach((pizza) => {
+        pizza.addTopping('mushrooms');
+    });
+}
+addMushroomsToPizza([pizzaOne, pizzaTwo]);
+pizzaOne.printThePizza();
+pizzaTwo.printThePizza();

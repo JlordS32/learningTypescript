@@ -7,8 +7,7 @@ class Pizza {
 	private base: Base = 'classic';
 	private toppings: string[] = [];
 
-	constructor(private title: string, private price: number) {
-	}
+	constructor(private title: string, private price: number) {}
 	printThePizza() {
 		console.log(`
 			Title: ${this.title}\n
@@ -31,13 +30,16 @@ class Pizza {
 	}
 }
 
-const pizza = new Pizza('Hawaiian', 10);
+const pizzaOne = new Pizza('Hawaiian', 10);
+const pizzaTwo = new Pizza('Meat Lovers', 15);
 
-pizza.selectbase('thin');
-pizza.addTopping('peperoni');
-pizza.addTopping('pineapple');
-pizza.addTopping('ham');
-pizza.printThePizza();
+function addMushroomsToPizza(pizzaz: Pizza[]): void {
+	pizzaz.forEach((pizza) => {
+		pizza.addTopping('mushrooms');
+	});
+}
 
-pizza.removeToppings('pineapple');
-pizza.printThePizza();
+addMushroomsToPizza([pizzaOne, pizzaTwo]);
+
+pizzaOne.printThePizza();
+pizzaTwo.printThePizza();
