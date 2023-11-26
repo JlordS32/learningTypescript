@@ -1,26 +1,62 @@
-// --------------------
-// Intersection Type
-// --------------------
+// Generic Interface
+// -------------------
 
-interface HasID {
-	id: number;
+interface Collection<T> {
+	data: T[];
+	name: string;
 }
 
-function addIdToValue<T>(val: T): T & HasID {
-	return {
-		id: Math.random(),
-		...val,
-	};
+const collectionOne: Collection<number> = {
+	data: [1, 2, 3],
+	name: 'collectionOne',
+};
+
+const collectionTwo: Collection<string> = {
+	data: ['apple', 'banana', 'orange'],
+	name: 'collectionOne',
+};
+
+interface User {
+	name: string;
+	age: number;
 }
 
-interface Post {
-	title: string;
-	thumbsUp: number;
+const collectionThree: Collection<User> = {
+	data: [
+		{
+			name: 'John',
+			age: 30,
+		},
+		{
+			name: 'Conor',
+			age: 19,
+		},
+		{
+			name: 'Dion',
+			age: 19,
+		},
+		{
+			name: 'Jaylou',
+			age: 21,
+		},
+	],
+	name: 'collectionOne',
+};
+
+type dWords = 'driving' | 'death' | 'shit';
+
+const collectionFour: Collection<dWords> = {
+	data: ['death', 'driving', 'shit'],
+	name: 'collectionOne',
+};
+
+function randomCollectionItem<T>(collection: Collection<T>): T {
+	return collection.data[Math.floor(Math.random() * collection.data.length)];
 }
 
-const post = addIdToValue<Post>({
-	title: 'My Post',
-	thumbsUp: 69,
-});
+const randomDataOne = randomCollectionItem(collectionOne);
+const randomDataTwo = randomCollectionItem(collectionTwo);
+const randomDataThree = randomCollectionItem(collectionThree);
+const randomDataFour = randomCollectionItem(collectionFour);
 
-console.log(Object.entries(post).map(([_, value]) => value).join('\n'));
+console.log({randomDataOne, randomDataTwo, randomDataThree, randomDataFour});
