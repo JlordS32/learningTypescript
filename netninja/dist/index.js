@@ -1,27 +1,37 @@
 "use strict";
-// extending interfaces
-const user = {
-    id: 1,
-    format() {
-        return `This user has an id of ${this.id}`;
-    },
-};
-const bill = {
-    id: 2,
-    amount: 50,
-    server: 'mario',
-    format() {
-        return `This user has an id of ${this.id}`;
-    },
-};
-function printFormatted(val) {
-    console.log(val.format());
+// ------------
+// Classes 101
+// ------------
+class Pizza {
+    constructor(title, price, base) {
+        this.toppings = [];
+        this.title = title;
+        this.price = price;
+        this.base = base;
+    }
+    printThePizza() {
+        console.log(`
+			Title: ${this.title}\n
+			Price: ${this.price}\n
+			Base: ${this.base}\n
+			Toppings: ${this.toppings ? this.toppings.join(', ') : 'none'}
+		`);
+    }
+    addTopping(topping) {
+        this.toppings.push(topping);
+    }
+    removeToppings(topping) {
+        this.toppings = this.toppings.filter((t) => t !== topping);
+    }
+    selectbase(base) {
+        this.base = base;
+    }
 }
-function printBill(val) {
-    console.log('server: ', val.server);
-    console.log(val.format());
-}
-printFormatted(user);
-printFormatted(bill);
-printBill(bill);
-printBill(user); // error
+const pizza = new Pizza('Hawaiian', 10, 'classic');
+pizza.selectbase('thin');
+pizza.addTopping('peperoni');
+pizza.addTopping('pineapple');
+pizza.addTopping('ham');
+pizza.printThePizza();
+pizza.removeToppings('pineapple');
+pizza.printThePizza();

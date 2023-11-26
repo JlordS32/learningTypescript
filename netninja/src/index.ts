@@ -1,41 +1,48 @@
-// extending interfaces
+// ------------
+// Classes 101
+// ------------
 
-interface HasFormatter {
-	format(): string;
+type Base = 'classic' | 'thick' | 'thin' | 'garlic';
+class Pizza {
+	title: string;
+	price: number;
+	base: Base;
+	toppings: string[] = [];
+
+	constructor(title: string, price: number, base: Base) {
+		this.title = title;
+		this.price = price;
+		this.base = base;
+	}
+	printThePizza() {
+		console.log(`
+			Title: ${this.title}\n
+			Price: ${this.price}\n
+			Base: ${this.base}\n
+			Toppings: ${this.toppings ? this.toppings.join(', ') : 'none'}
+		`);
+	}
+
+	addTopping(topping: string): void {
+		this.toppings.push(topping);
+	}
+
+	removeToppings(topping: string): void {
+		this.toppings = this.toppings.filter((t) => t !== topping);
+	}
+
+	selectbase(base: Base): void {
+		this.base = base;
+	}
 }
 
-interface Bill extends HasFormatter {
-	id: string | number;
-	amount: number;
-	server: string;
-}
+const pizza = new Pizza('Hawaiian', 10, 'classic');
 
-const user = {
-	id: 1,
-	format(): string {
-		return `This user has an id of ${this.id}`;
-	},
-};
+pizza.selectbase('thin');
+pizza.addTopping('peperoni');
+pizza.addTopping('pineapple');
+pizza.addTopping('ham');
+pizza.printThePizza();
 
-const bill = {
-	id: 2,
-	amount: 50,
-	server: 'mario',
-	format(): string {
-		return `This user has an id of ${this.id}`;
-	},
-};
-
-function printFormatted(val: HasFormatter): void {
-	console.log(val.format());
-}
-
-function printBill(val: Bill): void {
-	console.log('server: ', val.server);
-	console.log(val.format());
-}
-
-printFormatted(user);
-printFormatted(bill);
-printBill(bill);
-printBill(user); // error
+pizza.removeToppings('pineapple');
+pizza.printThePizza();
