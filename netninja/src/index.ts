@@ -4,15 +4,10 @@
 
 type Base = 'classic' | 'thick' | 'thin' | 'garlic';
 class Pizza {
-	title: string;
-	price: number;
-	base: Base;
-	toppings: string[] = [];
+	private base: Base = 'classic';
+	private toppings: string[] = [];
 
-	constructor(title: string, price: number, base: Base) {
-		this.title = title;
-		this.price = price;
-		this.base = base;
+	constructor(private title: string, private price: number) {
 	}
 	printThePizza() {
 		console.log(`
@@ -36,7 +31,7 @@ class Pizza {
 	}
 }
 
-const pizza = new Pizza('Hawaiian', 10, 'classic');
+const pizza = new Pizza('Hawaiian', 10);
 
 pizza.selectbase('thin');
 pizza.addTopping('peperoni');

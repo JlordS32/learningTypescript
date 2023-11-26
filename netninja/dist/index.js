@@ -3,11 +3,11 @@
 // Classes 101
 // ------------
 class Pizza {
-    constructor(title, price, base) {
-        this.toppings = [];
+    constructor(title, price) {
         this.title = title;
         this.price = price;
-        this.base = base;
+        this.base = 'classic';
+        this.toppings = [];
     }
     printThePizza() {
         console.log(`
@@ -27,7 +27,7 @@ class Pizza {
         this.base = base;
     }
 }
-const pizza = new Pizza('Hawaiian', 10, 'classic');
+const pizza = new Pizza('Hawaiian', 10);
 pizza.selectbase('thin');
 pizza.addTopping('peperoni');
 pizza.addTopping('pineapple');
