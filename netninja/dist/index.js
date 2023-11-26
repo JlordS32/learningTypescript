@@ -1,25 +1,32 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const fs_1 = require("fs");
 class CSVWriter {
     constructor(columns) {
         this.columns = columns;
-        this.csv = this.columns.join(',');
+        this.csv = this.columns.join(',') + '\n';
+    }
+    save(filename) {
+        (0, fs_1.appendFileSync)(filename, this.csv);
+        this.csv = '\n';
+        console.log('file saved to', filename);
     }
     addRows(values) {
         let rows = values.map((v) => this.formatRow(v));
-        this.csv += '\n' + rows.join('\n');
+        this.csv += rows.join('\n');
         console.log(this.csv);
     }
     formatRow(p) {
         return this.columns.map((col) => p[col]).join(',');
     }
-    printCsv() {
-        console.log(this.csv);
-    }
 }
 const writer = new CSVWriter(['id', 'amount', 'to', 'notes']);
 writer.addRows([
-    { id: 1, amount: 100, to: 'John', notes: 'Payment' },
-    { id: 2, amount: 200, to: 'Jane', notes: 'Birthday Present' },
-    { id: 2, amount: 500, to: 'Mario', notes: 'Fee' },
-    { id: 2, amount: 2300, to: 'Bowser', notes: 'Borrowed Money' },
+    {
+        id: 2,
+        amount: 10.99,
+        to: 'someones',
+        notes: 'some notes',
+    },
 ]);
+writer.save('./data/payment.csv');
