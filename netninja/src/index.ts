@@ -3,20 +3,24 @@
 // ------------
 
 type Base = 'classic' | 'thick' | 'thin' | 'garlic';
-class Pizza {
-	private base: Base = 'classic';
-	private toppings: string[] = [];
 
+class MenuItem {
 	constructor(private title: string, private price: number) {}
-	printThePizza() {
-		console.log(`
-			Title: ${this.title}\n
-			Price: ${this.price}\n
-			Base: ${this.base}\n
-			Toppings: ${this.toppings ? this.toppings.join(', ') : 'none'}
-		`);
+
+	get details(): string {
+		return `
+			Pizza: ${this.title}
+			Price: $${this.price}
+		`;
+	}
+}
+class Pizza extends MenuItem {
+	constructor(title: string, price: number) {
+		super(title, price);
 	}
 
+	private base: Base = 'classic';
+	private toppings: string[] = [];
 	addTopping(topping: string): void {
 		this.toppings.push(topping);
 	}
@@ -25,21 +29,15 @@ class Pizza {
 		this.toppings = this.toppings.filter((t) => t !== topping);
 	}
 
-	selectbase(base: Base): void {
-		this.base = base;
+	selectbase(b: Base): void {
+		this.base = b;
 	}
 }
 
-const pizzaOne = new Pizza('Hawaiian', 10);
-const pizzaTwo = new Pizza('Meat Lovers', 15);
+const pizza = new Pizza('Meat Lovers', 15);
 
-function addMushroomsToPizza(pizzaz: Pizza[]): void {
-	pizzaz.forEach((pizza) => {
-		pizza.addTopping('mushrooms');
-	});
+function printMenuItem(item: MenuItem): void {
+	console.log(item.details);
 }
 
-addMushroomsToPizza([pizzaOne, pizzaTwo]);
-
-pizzaOne.printThePizza();
-pizzaTwo.printThePizza();
+printMenuItem(pizza)
