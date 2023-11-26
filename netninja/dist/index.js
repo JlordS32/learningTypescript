@@ -29,9 +29,25 @@ class Pizza extends MenuItem {
     selectbase(b) {
         this.base = b;
     }
+    format() {
+        let formatted = this.details + '\n';
+        // base
+        formatted += `Pizza on a ${this.base} base `;
+        // toppings
+        if (this.toppings.length < 1) {
+            formatted += 'with no toppings\n';
+        }
+        else {
+            formatted += `with the toppings of ${this.toppings.join(', ')}\n`;
+        }
+        return formatted;
+    }
 }
 const pizza = new Pizza('Meat Lovers', 15);
-function printMenuItem(item) {
-    console.log(item.details);
+pizza.addTopping('Peperoni');
+pizza.addTopping('Jalapenos');
+pizza.selectbase('garlic');
+function printFormatted(val) {
+    console.log(val.format());
 }
-printMenuItem(pizza);
+printFormatted(pizza);

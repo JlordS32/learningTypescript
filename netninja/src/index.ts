@@ -4,7 +4,11 @@
 
 type Base = 'classic' | 'thick' | 'thin' | 'garlic';
 
-class MenuItem {
+interface HasFormatter {
+	format(): string;
+}
+
+abstract class MenuItem implements HasFormatter {
 	constructor(private title: string, private price: number) {}
 
 	get details(): string {
@@ -13,6 +17,8 @@ class MenuItem {
 			Price: $${this.price}
 		`;
 	}
+
+	abstract format(): string;
 }
 class Pizza extends MenuItem {
 	constructor(title: string, price: number) {
@@ -32,12 +38,31 @@ class Pizza extends MenuItem {
 	selectbase(b: Base): void {
 		this.base = b;
 	}
+
+	format(): string {
+		let formatted = this.details + '\n';
+
+		// base
+		formatted += `Pizza on a ${this.base} base `;
+
+		// toppings
+		if (this.toppings.length < 1) {
+			formatted += 'with no toppings\n';
+		} else {
+			formatted += `with the toppings of ${this.toppings.join(', ')}\n`
+		}
+
+		return formatted;
+	}
 }
 
 const pizza = new Pizza('Meat Lovers', 15);
+pizza.addTopping('Peperoni');
+pizza.addTopping('Jalapenos');
+pizza.selectbase('garlic');
 
-function printMenuItem(item: MenuItem): void {
-	console.log(item.details);
+function printFormatted(val: HasFormatter) {
+	console.log(val.format());
 }
 
-printMenuItem(pizza)
+printFormatted(pizza);
