@@ -1,5 +1,11 @@
-import { Pizza } from './models/pizza';
+const titleInput = document.querySelector(
+	'input[name="title"]'
+) as HTMLInputElement;
 
-document.addEventListener('DOMContentLoaded', async () => {
-	const pizzas = await Pizza.loadAll();
+const descInput = document.querySelector('textarea') as HTMLTextAreaElement;
+
+const form = document.querySelector('.create') as HTMLFormElement;
+
+form.addEventListener('submit', (e) => {
+	e.preventDefault();
 });

@@ -575,11 +575,13 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"4WE0n":[function(require,module,exports) {
-var _pizza = require("./models/pizza");
-document.addEventListener("DOMContentLoaded", async ()=>{
-    const pizzas = await (0, _pizza.Pizza).loadAll();
+const titleInput = document.querySelector('input[name="title"]');
+const descInput = document.querySelector("textarea");
+const form = document.querySelector(".create");
+form.addEventListener("submit", (e)=>{
+    e.preventDefault();
 });
 
-},{"./models/pizza":"SOKYE"}]},["bWBX3","4WE0n"], "4WE0n", "parcelRequire163d")
+},{}]},["bWBX3","4WE0n"], "4WE0n", "parcelRequire163d")
 
 //# sourceMappingURL=create.6789991c.js.map
