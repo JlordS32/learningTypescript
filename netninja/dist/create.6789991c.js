@@ -142,13 +142,13 @@
       this[globalName] = mainExports;
     }
   }
-})({"7lMyb":[function(require,module,exports) {
+})({"bWBX3":[function(require,module,exports) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
-module.bundle.HMR_BUNDLE_ID = "ceb3f8cc891f0f0b";
+module.bundle.HMR_BUNDLE_ID = "ab6513d26789991c";
 "use strict";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
@@ -574,107 +574,12 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
     });
 }
 
-},{}],"8tyFx":[function(require,module,exports) {
+},{}],"4WE0n":[function(require,module,exports) {
 var _pizza = require("./models/pizza");
-const rootElement = document.querySelector("main");
-function createPizzaTemplate(pizza) {
-    return `
-      <div class="pizza">
-         <h2>${pizza.title}</h2>
-         <p class="toppings">${pizza.toppings.join(", ")}</p>
-         <p>${pizza.description}</p>
-         <span>${pizza.price}</span>
-      </div>
-   `;
-}
-function renderTemplates(templates, parent) {
-    const templateEl = document.createElement("template");
-    templates.forEach((template)=>{
-        templateEl.innerHTML += template;
-    });
-    const fragment = templateEl.content;
-    const childNodes = Array.from(fragment.childNodes);
-    childNodes.forEach((node)=>{
-        parent.appendChild(node);
-    });
-}
 document.addEventListener("DOMContentLoaded", async ()=>{
     const pizzas = await (0, _pizza.Pizza).loadAll();
-    const pizzaTemplates = pizzas.map((pizza)=>createPizzaTemplate(pizza));
-    renderTemplates(pizzaTemplates, rootElement);
 });
 
-},{"./models/pizza":"SOKYE"}],"SOKYE":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Pizza", ()=>Pizza);
-var _dataResource = require("../services/DataResource");
-const Pizza = new (0, _dataResource.DataResource)("http://localhost:3000/pizzas");
+},{"./models/pizza":"SOKYE"}]},["bWBX3","4WE0n"], "4WE0n", "parcelRequire163d")
 
-},{"../services/DataResource":"7WAiV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7WAiV":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "DataResource", ()=>DataResource);
-class DataResource {
-    constructor(endpoint){
-        this.endpoint = endpoint;
-    }
-    async loadAll() {
-        const res = await fetch(this.endpoint);
-        return res.json();
-    }
-    async loadOne(id) {
-        const res = await fetch(`${this.endpoint}/${id}`);
-        return res.json();
-    }
-    async delete(id) {
-        const res = await fetch(`${this.endpoint}/${id}`, {
-            method: "DELETE"
-        });
-        return res;
-    }
-    async save(data) {
-        const res = await fetch(this.endpoint, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
-        return res;
-    }
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, "__esModule", {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || Object.prototype.hasOwnProperty.call(dest, key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}]},["7lMyb","8tyFx"], "8tyFx", "parcelRequire163d")
-
-//# sourceMappingURL=create.891f0f0b.js.map
+//# sourceMappingURL=create.6789991c.js.map
