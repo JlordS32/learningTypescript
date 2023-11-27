@@ -1,5 +1,3 @@
-import { Post } from "@/app/page";
-
 interface PostCardProps {
 	post: Post
 }
