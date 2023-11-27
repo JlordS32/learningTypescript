@@ -142,13 +142,13 @@
       this[globalName] = mainExports;
     }
   }
-})({"bWBX3":[function(require,module,exports) {
+})({"7lMyb":[function(require,module,exports) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
-module.bundle.HMR_BUNDLE_ID = "ab6513d26789991c";
+module.bundle.HMR_BUNDLE_ID = "ceb3f8cc891f0f0b";
 "use strict";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
@@ -574,23 +574,34 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
     });
 }
 
-},{}],"4WE0n":[function(require,module,exports) {
+},{}],"8tyFx":[function(require,module,exports) {
 var _pizza = require("./models/pizza");
-const titleInput = document.querySelector('input[name="title"]');
-const descInput = document.querySelector("textarea");
-const form = document.querySelector(".create");
-form.addEventListener("submit", async (e)=>{
-    e.preventDefault();
-    const data = new FormData(form);
-    const newPizza = {
-        title: data.get("title"),
-        description: data.get("description"),
-        toppings: data.getAll("toppings"),
-        price: Number(data.get("price"))
-    };
-    const res = await (0, _pizza.Pizza).save(newPizza);
-    if (!res.ok) console.log("Not able save the pizza");
-    if (res.ok) window.location.href = "/";
+const rootElement = document.querySelector("main");
+function createPizzaTemplate(pizza) {
+    return `
+      <div class="pizza">
+         <h2>${pizza.title}</h2>
+         <p class="toppings">${pizza.toppings.join(", ")}</p>
+         <p>${pizza.description}</p>
+         <span>${pizza.price}</span>
+      </div>
+   `;
+}
+function renderTemplates(templates, parent) {
+    const templateEl = document.createElement("template");
+    templates.forEach((template)=>{
+        templateEl.innerHTML += template;
+    });
+    const fragment = templateEl.content;
+    const childNodes = Array.from(fragment.childNodes);
+    childNodes.forEach((node)=>{
+        parent.appendChild(node);
+    });
+}
+document.addEventListener("DOMContentLoaded", async ()=>{
+    const pizzas = await (0, _pizza.Pizza).loadAll();
+    const pizzaTemplates = pizzas.map((pizza)=>createPizzaTemplate(pizza));
+    renderTemplates(pizzaTemplates, rootElement);
 });
 
 },{"./models/pizza":"SOKYE"}],"SOKYE":[function(require,module,exports) {
@@ -664,6 +675,6 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["bWBX3","4WE0n"], "4WE0n", "parcelRequire163d")
+},{}]},["7lMyb","8tyFx"], "8tyFx", "parcelRequire163d")
 
-//# sourceMappingURL=create.6789991c.js.map
+//# sourceMappingURL=index.891f0f0b.js.map
