@@ -575,13 +575,24 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"4WE0n":[function(require,module,exports) {
+var _pizza = require("./models/pizza");
 const titleInput = document.querySelector('input[name="title"]');
 const descInput = document.querySelector("textarea");
 const form = document.querySelector(".create");
-form.addEventListener("submit", (e)=>{
+form.addEventListener("submit", async (e)=>{
     e.preventDefault();
+    const data = new FormData(form);
+    const newPizza = {
+        title: data.get("title"),
+        description: data.get("description"),
+        toppings: data.getAll("toppings"),
+        price: Number(data.get("price"))
+    };
+    const res = await (0, _pizza.Pizza).save(newPizza);
+    if (!res.ok) console.log("Not able save the pizza");
+    if (res.ok) window.location.href = "/";
 });
 
-},{}]},["bWBX3","4WE0n"], "4WE0n", "parcelRequire163d")
+},{"./models/pizza":"SOKYE"}]},["bWBX3","4WE0n"], "4WE0n", "parcelRequire163d")
 
 //# sourceMappingURL=create.6789991c.js.map
